@@ -130,7 +130,32 @@ bool isPerfectSquare(ll x) {
 }
 
 void solve() {
+    int n;
+    cin>>n;
+    vector<int> a(n);
+    map<int, int> ff;
+    for(int& i : a){
+        cin>>i;
+        ff[i]++;
+    }
+    int more = 0;
+    int one = 0, ans = 0;
+    for(auto it : ff){
+        if(it.second == 1){
+            one++;
+        }
+        else{
+            more++;
+        }
+    }
+
     
+    ans = (one+1)/2;
+    ans *= 2;
+    ans += more;
+    cout<<ans<<endl;
+
+
 }
 
 int main() {
