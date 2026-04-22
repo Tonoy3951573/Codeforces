@@ -1,0 +1,1 @@
+{"name":"Local: SpacialPermutationBySabba","url":"/home/phi/Codeforces/SpacialPermutationBySabba.cpp","tests":[{"id":1776839880337,"input":"10 6 8","output":"1 10 8 7 6 9 2 3 4 5 "}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/phi/Codeforces/SpacialPermutationBySabba.cpp","group":"local","local":true}
