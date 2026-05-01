@@ -131,14 +131,41 @@ bool isPerfectSquare(ll x) {
 
 void solve() {
     int n;
-    cin >> n;
-    vector<int> a(n);
-    bool ok =  false;
-    for(int& i : a){
-        cin>>i;
-        if(i == 100) ok = true;
+    cin>>n;
+    vector<int> a(2*n);
+    for(int& i : a) cin>>i;
+    int mxmex = 1;
+    vector<bool> present(n + 1, false);
+    for(int i = 0; i < n*2; i++){
+        for(int j = 0; j <= 1; j++){
+            int l = i;
+            int r = l + j;
+            vector<int> added;
+            while(l >= 0 && r < n*2 && a[l] == a[r]){
+                if (!present[a[l]]) {
+                    present[a[l]] = true;
+                    added.push_back(a[r]);
+                }
+                l--;
+                r++;
+
+            }
+
+            if (!added.empty()) {
+                int cmex = 0;
+                while (cmex <= n && present[cmex]) {
+                    cmex++;
+                }
+                mxmex = max(mxmex, cmex);
+            }
+
+            for (int val : added) {
+                present[val] = false;
+            }
+        }
     }
-    cout<<((ok)?"Yes":"No")<<endl;
+
+    cout<<mxmex<<endl;
 }
 
 int main() {

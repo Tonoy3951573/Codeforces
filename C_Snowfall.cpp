@@ -132,13 +132,28 @@ bool isPerfectSquare(ll x) {
 void solve() {
     int n;
     cin >> n;
-    vector<int> a(n);
-    bool ok =  false;
-    for(int& i : a){
-        cin>>i;
-        if(i == 100) ok = true;
+    
+    vector<int> t6, t2, t1, t3;
+    
+    for (int i = 0; i < n; ++i) {
+        int x;
+        cin >> x;
+        if (x % 6 == 0) {
+            t6.push_back(x);
+        } else if (x % 2 == 0) {
+            t2.push_back(x);
+        } else if (x % 3 == 0) {
+            t3.push_back(x);
+        } else {
+            t1.push_back(x);
+        }
     }
-    cout<<((ok)?"Yes":"No")<<endl;
+    
+    for (int x : t6) cout << x << " ";
+    for (int x : t2) cout << x << " ";
+    for (int x : t1) cout << x << " ";
+    for (int x : t3) cout << x << " ";
+    cout << "\n";
 }
 
 int main() {
@@ -152,3 +167,4 @@ int main() {
         solve();
     }
 }
+

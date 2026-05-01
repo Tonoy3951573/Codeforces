@@ -131,14 +131,49 @@ bool isPerfectSquare(ll x) {
 
 void solve() {
     int n;
-    cin >> n;
-    vector<int> a(n);
-    bool ok =  false;
-    for(int& i : a){
+    cin>>n;
+    vector<int> v(n);
+    map<int,int> ff;
+    for(int& i : v) {
         cin>>i;
-        if(i == 100) ok = true;
+        ff[i]++;
     }
-    cout<<((ok)?"Yes":"No")<<endl;
+
+    //3,5,7 
+
+    if(ff[5] > 0 || ff[7] > 0){
+        cout<<-1<<endl;
+        return;
+    }
+
+    // 1 2 4 6  ---> (1 2 4  or 1 2 6 or  1 3 6 or 1 2 6  )
+
+    int grp = n/3;
+    if(ff[1] != grp || ff[2] + ff[3] != grp || ff[4] + ff[6] != grp) cout<<-1<<endl;
+    else{
+        if(ff[6] >= ff[3]){
+            
+            while(ff[4]>0 && ff[2] > 0){
+                cout<<"1 2 4"<<endl;
+                ff[4]--; 
+                ff[2]--;
+            }
+
+            while(ff[6]>0 && ff[2] > 0){
+                cout<<"1 2 6"<<endl;
+                ff[6]--; 
+                ff[2]--;
+            }
+
+            while(ff[6]>0 && ff[3] > 0){
+                cout<<"1 3 6"<<endl;
+                ff[6]--;
+                ff[3]--;
+            }
+        }
+        else cout<<-1<<endl;
+        
+    }
 }
 
 int main() {
@@ -147,7 +182,7 @@ int main() {
     // init_nCr();
 
     int t = 1;
-    cin >> t;
+    //cin >> t;
     while (t--) {
         solve();
     }

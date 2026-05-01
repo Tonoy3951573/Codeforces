@@ -130,15 +130,17 @@ bool isPerfectSquare(ll x) {
 }
 
 void solve() {
-    int n;
-    cin >> n;
-    vector<int> a(n);
-    bool ok =  false;
-    for(int& i : a){
-        cin>>i;
-        if(i == 100) ok = true;
+    int k;
+    cin>>k;
+    vector<int> a(k);
+    for(int& i : a) cin>>i;
+    int m = 0, n = 0;
+    for(int i : a){
+        if(i == 100) m++;
+        else n++;
     }
-    cout<<((ok)?"Yes":"No")<<endl;
+
+    cout<<(( m % 2 == 0 && ( m > 0 || n % 2 == 0))?"YES":"NO")<<endl;
 }
 
 int main() {
@@ -147,7 +149,7 @@ int main() {
     // init_nCr();
 
     int t = 1;
-    cin >> t;
+    //cin >> t;
     while (t--) {
         solve();
     }

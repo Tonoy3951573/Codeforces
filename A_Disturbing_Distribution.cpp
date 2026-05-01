@@ -130,15 +130,25 @@ bool isPerfectSquare(ll x) {
 }
 
 void solve() {
+    int M = 676767677;
     int n;
     cin >> n;
+    
     vector<int> a(n);
-    bool ok =  false;
-    for(int& i : a){
-        cin>>i;
-        if(i == 100) ok = true;
+    int sum  = 0;
+    
+    for (int i = 0; i < n; ++i) {
+        cin >> a[i];
+        if (a[i] > 1) {
+            sum += (a[i]%M);
+        }
     }
-    cout<<((ok)?"Yes":"No")<<endl;
+    
+    if (a[n - 1] == 1) {
+        sum += 1;
+    }
+    
+    cout << sum % M << "\n";
 }
 
 int main() {

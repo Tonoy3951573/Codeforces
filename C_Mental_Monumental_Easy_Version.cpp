@@ -129,16 +129,50 @@ bool isPerfectSquare(ll x) {
     return s * s == x;
 }
 
+bool check(int m, vector<int>& a){
+    vector<int> need(m,1);
+    vector<int> have, uf;
+    //jegulare convert korte parbo segula ber kori 
+    for(int x : a){
+        if(x < m && need[x]){
+            need[x] = 0;
+        }
+        else have.push_back(x);
+    }
+    //jeshobe convert korte hobe
+    for(int i = 0; i < m; i++){
+        if(need[i]) uf.push_back(i);
+    }
+    // to ekhane req = have[p]%b  --> q*b + req = have[p] mini have[p] er jonno q = 1  req < b   req* 2 + 1 <= have hoile b ache ar req pabo
+    int k = 0;
+    for(int req : uf){
+        while(k < have.size() && have[k] < req*2 + 1) k++;
+        if(k == have.size()) return false;
+        k++;
+    }
+    return true;
+}
+
 void solve() {
     int n;
-    cin >> n;
+    cin>>n;
     vector<int> a(n);
-    bool ok =  false;
-    for(int& i : a){
-        cin>>i;
-        if(i == 100) ok = true;
+    for(int& i : a) cin>>i;
+
+    sort(all(a));
+
+    int l = 0, h =  n;
+    int mx = 0;
+    while(l <= h){
+        int mid = l + (h - l)/2;
+        if(check(mid, a)){
+            mx = mid;
+            l = mid + 1;
+        }
+        else h = mid - 1;
     }
-    cout<<((ok)?"Yes":"No")<<endl;
+
+    cout<<mx<<endl;
 }
 
 int main() {

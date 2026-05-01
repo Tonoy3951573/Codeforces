@@ -129,17 +129,40 @@ bool isPerfectSquare(ll x) {
     return s * s == x;
 }
 
+//prefix sum use korle time complexty O(N) kora jabe maybe 
+
+#include <iostream>
+#include <vector>
+#include <climits> // For LLONG_MAX
+
+using namespace std;
+using ll = long long;
+//prefix sum (^_^)
 void solve() {
-    int n;
-    cin >> n;
-    vector<int> a(n);
-    bool ok =  false;
-    for(int& i : a){
-        cin>>i;
-        if(i == 100) ok = true;
+    int n, k, l = 1;
+    cin >> n >> k;
+    vector<ll> a(n), presum(n + 1, 0);
+    
+    for(ll& i : a) {
+        cin >> i;
+        presum[l] = presum[l - 1] + i;
+        l++;
     }
-    cout<<((ok)?"Yes":"No")<<endl;
+    ll msum = LLONG_MAX; 
+    int ans = 0;
+    
+    for(int i = 0; i <= n - k; i++) {
+        ll cur_sum = presum[i + k] - presum[i];
+        
+        if(cur_sum < msum) {
+            msum = cur_sum;
+            ans = i;
+        }
+    }
+    
+    cout << ans + 1 << endl;
 }
+//O(n*k)
 
 int main() {
     fastio;
@@ -147,7 +170,7 @@ int main() {
     // init_nCr();
 
     int t = 1;
-    cin >> t;
+    //cin >> t;
     while (t--) {
         solve();
     }
